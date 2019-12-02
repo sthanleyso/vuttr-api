@@ -1,0 +1,181 @@
+FORMAT: 1A
+
+# VUTTR (Very Useful Tools to Remember)
+
+This API is a simple repository for managing tools with their names, links, descriptions and tags.
+
+# Group Tools
+
+Resource related to tools in the API.
+
+## Tools Collection [/tools]
+
+### List All Tools [GET]
+
++ Response 200 (application/json)
+
+    + Body
+
+            [
+                {
+                    id: "4c95b491-1894-483f-866b-d3a9f9c8a8b1",
+                    title: "Notion",
+                    link: "https://notion.so",
+                    description: "All in one tool to organize teams and ideas. Write, plan, collaborate, and get organized. ",
+                    tags: [
+                        "organization",
+                        "planning",
+                        "collaboration",
+                        "writing",
+                        "calendar"
+                    ],
+                    "created_at": "2019-11-26",
+                    "updated_at": "2019-11-26"
+                },
+                {
+                    id: "bb7b14c8-0342-4d45-9498-41058b4f2619",
+                    title: "json-server",
+                    link: "https://github.com/typicode/json-server",
+                    description: "Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.",
+                    tags: [
+                        "api",
+                        "json",
+                        "schema",
+                        "node",
+                        "github",
+                        "rest"
+                    ],
+                    "created_at": "2019-11-26",
+                    "updated_at": "2019-11-26"
+                },
+                {
+                    id: "8d88cdab-5576-4c4c-b43c-d5d5ccb869a6",
+                    title: "fastify",
+                    link: "https://www.fastify.io/",
+                    description: "Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2.",
+                    tags: [
+                        "web",
+                        "framework",
+                        "node",
+                        "http2",
+                        "https",
+                        "localhost"
+                    ],
+                    "created_at": "2019-11-26",
+                    "updated_at": "2019-11-26"
+                }
+            ]
+
+### Create a New Tool [POST]
+
+You may create your own tool using this action.
+
++ title (string, required) - Tool title
++ link (string, required) - Link to tool website
++ description (string, required) - Tool description
++ tags (array[string], required) - A collection of tags
+
++ Request (application/json)
+
+            {
+                "title": "hotel",
+                "link": "https://github.com/typicode/hotel",
+                "description": "Local app manager. Start apps within your browser, developer tool with local .localhost domain and https out of the box.",
+                "tags": ["node", "organizing", "webapps", "domain", "developer", "https", "proxy"]
+            }
+
+
++ Response 201 (application/json)
+
+    + Attributes (Tool)
+
+## Tools Collection [/tools{?tag}]
+
+### Search For Tools [GET]
+
++ Parameters
+    + tag: `node` (string, optional) - Tag to be fetched
+
++ Response 200 (application/json)
+
+        [
+            {
+                id: "ae33efe9-2a7b-42e3-b9a3-1c98afe15e7c",
+                title: "json-server",
+                link: "https://github.com/typicode/json-server",
+                description: "Fake REST API based on a json schema. Useful for mocking and creating APIs for front-end devs to consume in coding challenges.",
+                tags: [
+                    "api",
+                    "json",
+                    "schema",
+                    "node",
+                    "github",
+                    "rest"
+                ],
+                "created_at": "2019-11-26",
+                "updated_at": "2019-11-26"
+            },
+            {
+                id: "f23b78ee-5782-4a2b-8bb3-1f4412c97183",
+                title: "fastify",
+                link: "https://www.fastify.io/",
+                description: "Extremely fast and simple, low-overhead web framework for NodeJS. Supports HTTP2.",
+                tags: [
+                    "web",
+                    "framework",
+                    "node",
+                    "http2",
+                    "https",
+                    "localhost"
+                ],
+                "created_at": "2019-11-26",
+                "updated_at": "2019-11-26"
+            }
+        ]
+
+## Tool [/tools/{id}]
+
+### Update a Tool [PUT]
+
++ Parameters
+    + id: `03e74a9e-bf23-425a-8f3e-96999a859524` (string) - Id of the tool
+
++ Request (application/json)
+
+            {
+                "title": "react",
+                "link": "https://github.com/facebook/react",
+                "description": "A declarative, efficient, and flexible JavaScript library for building user interfaces.",
+                "tags": ["javascript", "react", "frontend", "declarative", "ui", "library"]
+            }
+
++ Response 200 (application/json)
+
+            {
+                "id": "03e74a9e-bf23-425a-8f3e-96999a859524",
+                "title": "react",
+                "link": "https://github.com/facebook/react",
+                "description": "A declarative, efficient, and flexible JavaScript library for building user interfaces.",
+                "tags": ["javascript", "react", "frontend", "declarative", "ui", "library"],
+                "created_at": "2019-11-26",
+                "updated_at": "2019-11-27"
+            }
+
+### Delete a Tool [DELETE]
+
++ Parameters
+    + id: `1bce9d62-27fe-4777-8707-c273dadda9c2` (string) - Id of the tool
+
++ Response 204
+
+# Data Structures
+
+## Tool (object)
+
++ id: `1b9d6bcd-bbfd-4b2d-9b5d-ab8dfbbd4bed` (string) - Tool Id
++ title: hotel (string, required) - Tool title
++ link: https://github.com/typicode/hotel (string, required) - Link to tool website
++ description: ocal app manager. Start apps within your browser, developer tool with local .localhost domain and https out of the box. (string, required) - Tool description
++ tags: node, organizing, webapps, domain, developer, https, proxy (array[string], required) - A collection of tags
++ created_at: `2019-11-26` (string) - Tool creation date
++ updated_at: `2019-11-26` (string) - Tool update date
